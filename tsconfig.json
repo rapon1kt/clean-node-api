@@ -1,12 +1,17 @@
 {
 	"compilerOptions": {
-		"module": "system",
-		"noImplicitAny": true,
-		"removeComments": true,
-		"preserveConstEnums": true,
-		"outFile": "../../built/local/tsc.js",
-		"sourceMap": true
+		"outDir": "dist",
+		"module": "commonjs",
+		"target": "es2019",
+		"esModuleInterop": true,
+		"sourceMap": true,
+		"baseUrl": "src",
+		"rootDirs": ["src", "tests"],
+		"paths": {
+			"@/tests/*": ["../tests/*"],
+			"@/*": ["*"]
+		}
 	},
-	"include": ["src/**/*"],
-	"exclude": ["tests/*.spec.ts"]
+	"include": ["src", "tests"],
+	"exclude": []
 }
