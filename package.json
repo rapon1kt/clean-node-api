@@ -10,6 +10,7 @@
 	"author": "",
 	"license": "ISC",
 	"devDependencies": {
+		"path": "^0.12.7",
 		"ts-node-dev": "^2.0.0",
 		"typescript": "^5.7.2",
 		"vite": "^5.4.11",
