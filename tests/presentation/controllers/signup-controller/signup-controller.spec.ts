@@ -1,7 +1,7 @@
 import { SignUpController } from "@/presentation/controllers/";
-import { MissingParamError } from "@/presentation/errors";
+import { InvalidParamError, MissingParamError } from "@/presentation/errors";
 import { EmailValidator } from "@/presentation/protocols";
-import { describe, expect, test } from "vitest";
+import { describe, expect, test, vi } from "vitest";
 
 interface sutTypes {
 	sut: SignUpController;
@@ -99,5 +99,21 @@ describe("SingUp Controller", () => {
 		expect(httpResponse.body).toEqual(
 			new MissingParamError("passwordConfirmation")
 		);
+	});
+
+	test("Should return 400 if an invalid email is provided", () => {
+		const { sut, emailValidatorStub } = makeSut();
+		vi.spyOn(emailValidatorStub, "isValid").mockReturnValueOnce(false);
+		const httpRequest = {
+			body: {
+				name: "any_name",
+				email: "invalid_email@email.com",
+				password: "any_password",
+				passwordConfirmation: "any_password",
+			},
+		};
+		const httpResponse = sut.sign(httpRequest);
+		expect(httpResponse.statusCode).toBe(400);
+		expect(httpResponse.body).toEqual(new InvalidParamError("email"));
 	});
 });
