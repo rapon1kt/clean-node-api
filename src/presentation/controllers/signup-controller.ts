@@ -1,14 +1,7 @@
-type HttpRequest = {
-	body: {
-		name: string;
-		password: string;
-		passwordConfirmation: string;
-		email: string;
-	};
-};
+import { HttpRequest, HttpResponse } from "@/presentation/protocols/http";
 
 export default class SignUpController {
-	sign(httpRequest: HttpRequest): any {
+	sign(httpRequest: HttpRequest): HttpResponse {
 		if (!httpRequest.body) {
 			return {
 				statusCode: 400,
