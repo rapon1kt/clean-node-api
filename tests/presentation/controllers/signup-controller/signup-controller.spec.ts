@@ -7,7 +7,7 @@ describe("SingUp Controller", () => {
 		const httpRequest = {
 			body: undefined,
 		};
-		const httpResponse = sut.handle(httpRequest);
+		const httpResponse = sut.sign(httpRequest);
 		expect(httpResponse.statusCode).toBe(400);
 	});
 
@@ -21,7 +21,7 @@ describe("SingUp Controller", () => {
 				passwordConfirmation: "any_password",
 			},
 		};
-		const httpResponse = sut.handle(httpRequest);
+		const httpResponse = sut.sign(httpRequest);
 		expect(httpResponse.statusCode).toBe(400);
 	});
 
@@ -35,7 +35,7 @@ describe("SingUp Controller", () => {
 				passwordConfirmation: "any_password",
 			},
 		};
-		const httpResponse = sut.handle(httpRequest);
+		const httpResponse = sut.sign(httpRequest);
 		expect(httpResponse.statusCode).toBe(400);
 	});
 
@@ -49,7 +49,7 @@ describe("SingUp Controller", () => {
 				passwordConfirmation: "",
 			},
 		};
-		const httpResponse = sut.handle(httpRequest);
+		const httpResponse = sut.sign(httpRequest);
 		expect(httpResponse.statusCode).toBe(400);
 	});
 
@@ -63,7 +63,7 @@ describe("SingUp Controller", () => {
 				passwordConfirmation: "",
 			},
 		};
-		const httpResponse = sut.handle(httpRequest);
+		const httpResponse = sut.sign(httpRequest);
 		expect(httpResponse.statusCode).toBe(400);
 	});
 });
