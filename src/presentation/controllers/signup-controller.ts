@@ -8,7 +8,7 @@ type HttpRequest = {
 };
 
 export default class SignUpController {
-	handle(httpRequest: HttpRequest): any {
+	sign(httpRequest: HttpRequest): any {
 		if (!httpRequest.body) {
 			return {
 				statusCode: 400,
