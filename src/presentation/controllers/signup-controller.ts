@@ -13,6 +13,17 @@ export default class SignUpController {
 			return {
 				statusCode: 400,
 			};
+		} else if (!httpRequest.body.name || !httpRequest.body.email) {
+			return {
+				statusCode: 400,
+			};
+		} else if (
+			!httpRequest.body.password ||
+			!httpRequest.body.passwordConfirmation
+		) {
+			return {
+				statusCode: 400,
+			};
 		}
 	}
 }
