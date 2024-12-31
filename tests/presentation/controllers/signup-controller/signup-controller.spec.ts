@@ -52,4 +52,18 @@ describe("SingUp Controller", () => {
 		const httpResponse = sut.handle(httpRequest);
 		expect(httpResponse.statusCode).toBe(400);
 	});
+
+	test("Should return 400 if no passwordConfirmation is provided", () => {
+		const sut = new SignUpController();
+		const httpRequest = {
+			body: {
+				name: "any_name",
+				email: "any@email.com",
+				password: "any_password",
+				passwordConfirmation: "",
+			},
+		};
+		const httpResponse = sut.handle(httpRequest);
+		expect(httpResponse.statusCode).toBe(400);
+	});
 });
