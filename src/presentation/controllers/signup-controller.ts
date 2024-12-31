@@ -1,22 +1,19 @@
 import { HttpRequest, HttpResponse } from "@/presentation/protocols/http";
+import { badRequest } from "../helpers/http-helper";
+import { MissingParamError } from "../errors";
 
 export default class SignUpController {
 	sign(httpRequest: HttpRequest): HttpResponse {
-		if (!httpRequest.body) {
-			return {
-				statusCode: 400,
-			};
-		} else if (!httpRequest.body.name || !httpRequest.body.email) {
-			return {
-				statusCode: 400,
-			};
-		} else if (
-			!httpRequest.body.password ||
-			!httpRequest.body.passwordConfirmation
-		) {
-			return {
-				statusCode: 400,
-			};
+		const requiredFields = [
+			"name",
+			"email",
+			"password",
+			"passwordConfirmation",
+		];
+		for (const field of requiredFields) {
+			if (!httpRequest.body[field]) {
+				return badRequest(new MissingParamError(field));
+			}
 		}
 	}
 }
