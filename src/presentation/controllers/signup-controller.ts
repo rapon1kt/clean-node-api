@@ -1,8 +1,9 @@
-import { HttpRequest, HttpResponse } from "@/presentation/protocols/http";
+import { HttpRequest, HttpResponse } from "../protocols/http";
 import { badRequest } from "../helpers/http-helper";
 import { MissingParamError } from "../errors";
+import { Controller } from "../protocols/controller";
 
-export default class SignUpController {
+export default class SignUpController implements Controller {
 	sign(httpRequest: HttpRequest): HttpResponse {
 		const requiredFields = [
 			"name",
