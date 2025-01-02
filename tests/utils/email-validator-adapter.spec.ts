@@ -24,4 +24,11 @@ describe("EmailValidatorAdapter", () => {
 		const isValid = sut.isValid("valid_email@email.com");
 		expect(isValid).toBe(true);
 	});
+
+	test("Should call validator with correct email", () => {
+		const sut = new EmailValidatorAdapter();
+		const isEmailSpy = vi.spyOn(validator, "isEmail");
+		sut.isValid("any@email.com");
+		expect(isEmailSpy).toHaveBeenLastCalledWith("any@email.com");
+	});
 });
