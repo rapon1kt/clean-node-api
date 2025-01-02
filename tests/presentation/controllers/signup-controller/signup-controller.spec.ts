@@ -207,7 +207,6 @@ describe("SingUp Controller", () => {
 		};
 		sut.sign(httpRequest);
 		expect(addSpy).toHaveBeenCalledWith({
-			id: "192837645123",
 			name: "any_name",
 			email: "any_email@mail.com",
 			password: "any_password",
