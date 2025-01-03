@@ -1,10 +1,14 @@
 import { DbAddAccount } from "@/data/usecases/db-add-account";
 import { describe, expect, test, vi } from "vitest";
 import { Encrypter } from "../protocols/encrypter";
+import { AddAcccountRepository } from "../protocols";
+import { AddAccountModel } from "@/domain/usecases";
+import { Account } from "@/domain/models";
 
 interface SutTypes {
 	sut: DbAddAccount;
 	encrypterStub: Encrypter;
+	addAccountRepositoryStub: AddAcccountRepository;
 }
 
 const makeEncrypter = (): Encrypter => {
@@ -16,13 +20,29 @@ const makeEncrypter = (): Encrypter => {
 	return new EncrypterStub();
 };
 
+const makeAddAcountRepository = (): AddAcccountRepository => {
+	class AddAccountRepositoryStub implements AddAcccountRepository {
+		add(accountData: AddAccountModel): Promise<Account> {
+			const fakeAccount = {
+				name: "valid_name",
+				email: "valid_email",
+				password: "hashed_password",
+			};
+			return new Promise((resolve) => resolve(fakeAccount));
+		}
+	}
+	return new AddAccountRepositoryStub();
+};
+
 const makeSut = (): SutTypes => {
 	const encrypterStub = makeEncrypter();
-	const sut = new DbAddAccount(encrypterStub);
+	const addAccountRepositoryStub = makeAddAcountRepository();
+	const sut = new DbAddAccount(encrypterStub, addAccountRepositoryStub);
 
 	return {
 		sut,
 		encrypterStub,
+		addAccountRepositoryStub,
 	};
 };
 
@@ -51,5 +71,21 @@ describe("DbAddAccount", () => {
 		};
 		const promise = sut.add(accountData);
 		await expect(promise).rejects.toThrow();
+	});
+
+	test("Should calls AddAccountRepository with correct values", async () => {
+		const { sut, addAccountRepositoryStub } = makeSut();
+		const addAccountRepositorySpy = vi.spyOn(addAccountRepositoryStub, "add");
+		const accountData = {
+			name: "valid_name",
+			email: "valid_email",
+			password: "valid_password",
+		};
+		await sut.add(accountData);
+		expect(addAccountRepositorySpy).toHaveBeenCalledWith({
+			name: "valid_name",
+			email: "valid_email",
+			password: "hashed_password",
+		});
 	});
 });
