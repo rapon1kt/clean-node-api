@@ -1,6 +1,6 @@
 dotenv.config();
 import dotenv from "dotenv";
-import { afterAll, beforeAll, describe, expect, test } from "vitest";
+import { beforeAll, beforeEach, describe, expect, test } from "vitest";
 import { AccountMongoRepository } from "@/infra/db/mongodb/account-repository/account-repository";
 import { MongooseHelper } from "@/infra/db/mongodb/helpers/mongoose-helper";
 
@@ -12,8 +12,9 @@ describe("Account Mongo Repository", () => {
 	beforeAll(async () => {
 		await MongooseHelper.connect(process.env.MONGO_URL);
 	});
-	afterAll(async () => {
-		await MongooseHelper.disconnect();
+	beforeEach(async () => {
+		const accountCollection = MongooseHelper.getCollection("accounts");
+		await accountCollection.deleteMany({});
 	});
 	test("Should return an account on success", async () => {
 		const sut = makeSut();
