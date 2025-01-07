@@ -29,7 +29,4 @@ describe("Account Mongo Repository", () => {
 		expect(account._doc.email).toBe("any@email.com");
 		expect(account._doc.password).toBe("any_password");
 	});
-	test("Should return correctlly an collection", () => {
-		const sut = makeSut();
-	});
 });
