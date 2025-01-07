@@ -3,13 +3,15 @@
 	"version": "1.0.0",
 	"description": "Clean typescript API",
 	"scripts": {
-		"test": "vitest"
+		"test": "vitest",
+		"dev": "tsnd --respawn src/main/server.ts"
 	},
 	"keywords": [],
 	"author": "Gustavo Raponi Silva",
 	"license": "ISC",
 	"devDependencies": {
 		"@types/bcrypt": "^5.0.2",
+		"@types/express": "^5.0.0",
 		"@types/mongoose": "^5.11.96",
 		"@types/validator": "^13.12.2",
 		"path": "^0.12.7",
@@ -21,6 +23,7 @@
 	"dependencies": {
 		"bcrypt": "^5.1.1",
 		"dotenv": "^16.4.7",
+		"express": "^4.21.2",
 		"mongoose": "^8.9.3",
 		"validator": "^13.12.0"
 	}
