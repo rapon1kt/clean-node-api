@@ -1,13 +1,12 @@
 {
 	"name": "clean-node-api",
 	"version": "1.0.0",
-	"description": "",
-	"main": "index.js",
+	"description": "Clean typescript API",
 	"scripts": {
 		"test": "vitest"
 	},
 	"keywords": [],
-	"author": "",
+	"author": "Gustavo Raponi Silva",
 	"license": "ISC",
 	"devDependencies": {
 		"@types/bcrypt": "^5.0.2",
