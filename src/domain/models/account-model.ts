@@ -1,7 +1,7 @@
 export interface Account {
-	id: string;
+	id?: string;
 	name: string;
 	email: string;
 	password: string;
-	_doc: any;
+	_doc?: any;
 }
