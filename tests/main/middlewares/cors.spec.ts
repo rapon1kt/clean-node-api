@@ -1,9 +1,10 @@
 import request from "supertest";
-import app from "@/main/config/app";
+import { setUpApp } from "@/main/config/app";
 import { describe, test } from "vitest";
 
 describe("CORS Middlewares", () => {
 	test("Should enable CORS", async () => {
+		const app = await setUpApp();
 		app.get("/test_cors", (req, res) => {
 			res.send();
 		});
