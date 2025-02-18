@@ -1,4 +1,4 @@
-import { MongooseHelper } from "@/infra/db/mongodb/helpers/mongoose-helper";
+import { MongooseHelper } from "../infra/db/mongodb/helpers/mongoose-helper";
 import env from "./config/env";
 
 MongooseHelper.connect(env.mongoUrl)
