@@ -1,4 +1,5 @@
+require("dotenv").config();
 export default {
 	mongoUrl: process.env.MONGO_URL,
-	port: 5050,
+	port: 3000,
 };
