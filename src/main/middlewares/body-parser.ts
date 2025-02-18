@@ -1,3 +1,5 @@
-import { json } from "express";
+import bodyParser from "body-parser";
 
-export const bodyParser = json();
+export const bodyParsed = bodyParser.urlencoded({
+	extended: true,
+});
