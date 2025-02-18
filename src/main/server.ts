@@ -1,5 +1,11 @@
-import app from "./config/app";
+import { MongooseHelper } from "@/infra/db/mongodb/helpers/mongoose-helper";
+import env from "./config/env";
 
-app.listen(3000, () => {
-	console.log("Server is online on port: 3000");
-});
+MongooseHelper.connect(env.mongoUrl)
+	.then(async () => {
+		const app = (await import("./config/app")).default;
+		app.listen(env.port, () =>
+			console.log(`Server is running at http://localhost:${env.port}`)
+		);
+	})
+	.catch(console.error);
