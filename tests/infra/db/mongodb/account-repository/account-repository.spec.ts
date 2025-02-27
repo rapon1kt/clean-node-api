@@ -13,7 +13,7 @@ describe("Account Mongo Repository", () => {
 		await MongooseHelper.connect(process.env.MONGO_URL);
 	});
 	beforeEach(async () => {
-		const accountCollection = MongooseHelper.getCollection("accounts");
+		const accountCollection = await MongooseHelper.getCollection("accounts");
 		await accountCollection.deleteMany({});
 	});
 	test("Should return an account on success", async () => {
@@ -25,8 +25,8 @@ describe("Account Mongo Repository", () => {
 		});
 		expect(account).toBeTruthy();
 		expect(account.id).toBeTruthy();
-		expect(account._doc.name).toBe("any_name");
-		expect(account._doc.email).toBe("any@email.com");
-		expect(account._doc.password).toBe("any_password");
+		expect(account.name).toBe("any_name");
+		expect(account.email).toBe("any@email.com");
+		expect(account.password).toBe("any_password");
 	});
 });
