@@ -1,7 +1,7 @@
-import mongoose, { Collection } from "mongoose";
+import mongoose, { Collection, Mongoose } from "mongoose";
 
 export const MongooseHelper = {
-	client: mongoose,
+	client: null as Mongoose,
 	uri: null as string,
 	async connect(uri: string): Promise<void> {
 		this.uri = uri;
@@ -15,7 +15,7 @@ export const MongooseHelper = {
 	},
 
 	async getCollection(name: string): Promise<Collection> {
-		if (this.client.connection.readyState === 0) {
+		if (mongoose.connection.readyState !== 1) {
 			await this.connect(this.uri);
 		}
 		return this.client.connection.collection(name);
