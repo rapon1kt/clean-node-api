@@ -61,7 +61,7 @@ describe("SingUp Controller", () => {
 				passwordConfirmation: "any_password",
 			},
 		};
-		const httpResponse = await sut.sign(httpRequest);
+		const httpResponse = await sut.handle(httpRequest);
 		expect(httpResponse.statusCode).toBe(400);
 		expect(httpResponse.body).toEqual(new MissingParamError("name"));
 	});
@@ -76,7 +76,7 @@ describe("SingUp Controller", () => {
 				passwordConfirmation: "any_password",
 			},
 		};
-		const httpResponse = await sut.sign(httpRequest);
+		const httpResponse = await sut.handle(httpRequest);
 		expect(httpResponse.statusCode).toBe(400);
 		expect(httpResponse.body).toEqual(new MissingParamError("email"));
 	});
@@ -91,7 +91,7 @@ describe("SingUp Controller", () => {
 				passwordConfirmation: "",
 			},
 		};
-		const httpResponse = await sut.sign(httpRequest);
+		const httpResponse = await sut.handle(httpRequest);
 		expect(httpResponse.statusCode).toBe(400);
 		expect(httpResponse.body).toEqual(new MissingParamError("password"));
 	});
@@ -106,7 +106,7 @@ describe("SingUp Controller", () => {
 				passwordConfirmation: "any_password",
 			},
 		};
-		const httpResponse = await sut.sign(httpRequest);
+		const httpResponse = await sut.handle(httpRequest);
 		expect(httpResponse.statusCode).toBe(400);
 		expect(httpResponse.body).toEqual(new MissingParamError("password"));
 	});
@@ -121,7 +121,7 @@ describe("SingUp Controller", () => {
 				passwordConfirmation: "",
 			},
 		};
-		const httpResponse = await sut.sign(httpRequest);
+		const httpResponse = await sut.handle(httpRequest);
 		expect(httpResponse.statusCode).toBe(400);
 		expect(httpResponse.body).toEqual(
 			new MissingParamError("passwordConfirmation")
@@ -139,7 +139,7 @@ describe("SingUp Controller", () => {
 				passwordConfirmation: "any_password",
 			},
 		};
-		const httpResponse = await sut.sign(httpRequest);
+		const httpResponse = await sut.handle(httpRequest);
 		expect(httpResponse.statusCode).toBe(400);
 		expect(httpResponse.body).toEqual(new InvalidParamError("email"));
 	});
@@ -155,7 +155,7 @@ describe("SingUp Controller", () => {
 				passwordConfirmation: "any_password",
 			},
 		};
-		await sut.sign(httpRequest);
+		await sut.handle(httpRequest);
 		expect(isValidSpy).toHaveBeenCalledWith("any@email.com");
 	});
 
@@ -172,7 +172,7 @@ describe("SingUp Controller", () => {
 				passwordConfirmation: "any_password",
 			},
 		};
-		const httpResponse = await sut.sign(httpRequest);
+		const httpResponse = await sut.handle(httpRequest);
 		expect(httpResponse.statusCode).toBe(500);
 		expect(httpResponse.body).toEqual(new ServerErorr());
 	});
@@ -187,7 +187,7 @@ describe("SingUp Controller", () => {
 				passwordConfirmation: "invalid_password",
 			},
 		};
-		const httpResponse = await sut.sign(httpRequest);
+		const httpResponse = await sut.handle(httpRequest);
 		expect(httpResponse.statusCode).toBe(400);
 		expect(httpResponse.body).toEqual(
 			new InvalidParamError("passwordConfirmation")
@@ -205,7 +205,7 @@ describe("SingUp Controller", () => {
 				passwordConfirmation: "any_password",
 			},
 		};
-		await sut.sign(httpRequest);
+		await sut.handle(httpRequest);
 		expect(addSpy).toHaveBeenCalledWith({
 			name: "any_name",
 			email: "any_email@mail.com",
@@ -226,7 +226,7 @@ describe("SingUp Controller", () => {
 				passwordConfirmation: "any_password",
 			},
 		};
-		const httpResponse = await sut.sign(httpRequest);
+		const httpResponse = await sut.handle(httpRequest);
 		expect(httpResponse.statusCode).toBe(500);
 		expect(httpResponse.body).toEqual(new ServerErorr());
 	});
@@ -241,7 +241,7 @@ describe("SingUp Controller", () => {
 				passwordConfirmation: "any_password",
 			},
 		};
-		const httpResponse = await sut.sign(httpRequest);
+		const httpResponse = await sut.handle(httpRequest);
 		expect(httpResponse.statusCode).toBe(200);
 		expect(httpResponse.body).toEqual({
 			id: "valid_id",
