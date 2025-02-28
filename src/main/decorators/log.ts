@@ -9,10 +9,7 @@ export class LogControllerDecorator implements Controller {
 	private readonly controller: Controller;
 	private readonly logErrorRepository: LogErrorRepository;
 
-	constructor(
-		controller: Controller,
-		logErrorRespository?: LogErrorRepository
-	) {
+	constructor(controller: Controller, logErrorRespository: LogErrorRepository) {
 		this.controller = controller;
 		this.logErrorRepository = logErrorRespository;
 	}
